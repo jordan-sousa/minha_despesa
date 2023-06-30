@@ -39,6 +39,10 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+            'password' => [
+                'email' => 'email',
+                'password' => 'senha',
+            ],    
         ],
     ],
 
@@ -62,7 +66,10 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Usuario::class,
+            'table' => 'usuario',
+            'email' => 'email',
+            'password' => 'senha',    
         ],
 
         // 'users' => [

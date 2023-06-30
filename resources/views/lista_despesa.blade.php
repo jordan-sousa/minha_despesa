@@ -51,6 +51,7 @@
                             <th>Valor</th>
                             <th>Data pagamento</th>
                             <th>Categoria</th>
+                            <th>Usuario</th>
                             <th>Excluir</th>
                             <th>Editar</th>
                 
@@ -64,7 +65,9 @@
                                 <td>{{$despesa->descricao}}</td>
                                 <td>{{$despesa->valor}}</td>
                                 <td>{{$despesa->data_pagamento}}</td>
-                                <td>{{$despesa->categoria_id}}</td>
+                                <td>{{$despesa->categoria}}</td>
+                                <td>{{$despesa->id}}</td>
+
                                 <td>
                                     <a href="/delete-despesa/{{$despesa->id}}" class="btn btn-danger">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">

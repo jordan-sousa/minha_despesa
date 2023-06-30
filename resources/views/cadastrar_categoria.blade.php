@@ -12,10 +12,9 @@
 </head>
 <body class="bg-secondary">
     <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-        <div class="container">
-            
+        <div class="container collapse navbar-collapse">    
             <ul class="navbar-nav">
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link btn btn-primary m-1" href="/cadastrar-despesa">Cadastrar</a>
                 </li>
                 <li class="nav-item">
@@ -29,7 +28,8 @@
                 </li>
             </ul>
 
-            <a class="btn btn-primary mb-9 " style="float: right;" href="#" role="button">Sair</a>
+            <p class="text-white">{{Auth::user()->nome}}</p>
+            <a class="btn btn-primary mb-9 " style="float: right;" href="/logout" role="button">Sair</a>
 
 
         </div>

@@ -38,9 +38,10 @@ class DespesasController extends Controller {
 
     public function ListarDespesa() {
         $despesa = Despesas::get();
-        $despesa = Despesas::select('despesas.id', 'despesas.nome', 'despesas.descricao', 'despesas.valor', 'despesas.data_pagamento', 'despesas.categoria_id')
+        $despesa = Despesas::select('despesas.id', 'despesas.nome', 'despesas.descricao', 'despesas.valor', 
+                'despesas.data_pagamento', 'despesas.categoria_id', 'categoria.nome as categoria')
             ->join('categoria', 'categoria.id', '=', 'despesas.categoria_id')->get();
-
+// dd($despesa);   
         return view('lista_despesa', ['despesas'=> $despesa]);
     }
 

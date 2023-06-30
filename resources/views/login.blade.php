@@ -14,17 +14,18 @@
     <div class="container ">
         <div class="row justify-content-center d-flex justify-content-center align-items-center" style="height: 100vh;">
             <div class="col-md-6 ">
-                <form class="center-form bg-light p-3">
+                <form class="center-form bg-light p-3" method="post" action="/login">
+                @csrf
                     <h1 class="text-center">Login</h1>
                     
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email " class="form-control" id="email" placeholder="Digite seu email" >
+                        <input type="email " class="form-control" id="email" name="email" placeholder="Digite seu email" >
                     </div>
 
                     <div class="form-group">
                         <label for="password">Senha</label>
-                        <input type="password" class="form-control" id="password" placeholder="Digite sua senha">
+                        <input type="password" class="form-control" id="password" name="senha" placeholder="Digite sua senha">
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Entrar</button>
                 </form>

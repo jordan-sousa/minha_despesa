@@ -14,7 +14,7 @@
     <div class="row justify-content-center d-flex justify-content-center align-items-center" style="height: 100vh;">
         <div class="col-md-6 ">
     
-            <form method="POST" action="{{ route('/usuarios') }}" class="center-form bg-light p-3">
+            <form method="post" action="/salvar-usuario" class="center-form bg-light p-3">
                 @csrf
                     <h1>Cadastro de Usuário</h1>
                     <div class="form-group">
@@ -32,7 +32,10 @@
                         <input type="password" class="form-control" id="senha" name="senha" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        <a href="/form-login" class="btn btn-primary ml-9 ">Já tenho conta</a>
+                    </div>
             </form>
         </div>    
     </div>

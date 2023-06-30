@@ -1,29 +1,38 @@
 <?php
-
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Usuario;
+use App\Models\Categoria;
+
 use Illuminate\Http\Request;
 
-class UsuarioController extends Controller{
-    public function store(Request $request)
-    {
-        // Validação dos dados recebidos do formulário
-        $request->validate([
-            'nome' => 'required',
-            'email' => 'required|email|unique:usuarios',
-            'senha' => 'required|min:6',
-        ]);
+class UsuarioController extends Controller {
+    public function CadastrarUsuario() {
+        $user = Usuario::get();
+        return view('cadastro_usuario', ['usuario'=> $user]);
+        
+    }
 
-        // Criação do usuário no banco de dados
-        // Usuario::create([
-        //     'nome' => $request->nome,
-        //     'email' => $request->email,
-        //     'senha' => bcrypt($request->senha),
-        // ]);
+    public function SalvarUsuario(Request $request) {
 
-        // dd($request);
-
-        // Redirecionamento ou resposta de sucesso
-        return redirect()->route('usuarios')->with('success', 'Usuário cadastrado com sucesso!');
+        try {   // TRATAMENTO DE ERRO
+            $request->validate([
+                'nome' => "required",
+                'email' => "required|email|unique:usuario",
+                'senha' => "required|min:8",
+            ]);
+            
+            $user = Usuario::create([
+                'nome'=>$request->nome,
+                'email'=>$request->email,
+                'senha' => Hash::make($request->senha),
+            ]);
+            // dd($user);
+    
+            return redirect('/cadastrar-usuario');
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+        
     }
 }
