@@ -28,6 +28,7 @@
                 </li>
             </ul>
 
+            <p class="text-white">{{Auth::user()->nome}}</p>
             <a class="btn btn-primary mb-9 " style="float: right;" href="#" role="button">Sair</a>
 
 
@@ -66,7 +67,7 @@
                                 <td>{{$despesa->valor}}</td>
                                 <td>{{$despesa->data_pagamento}}</td>
                                 <td>{{$despesa->categoria}}</td>
-                                <td>{{$despesa->id}}</td>
+                                <td>{{$despesa->usuario}}</td>
 
                                 <td>
                                     <a href="/delete-despesa/{{$despesa->id}}" class="btn btn-danger">

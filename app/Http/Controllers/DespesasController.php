@@ -1,49 +1,56 @@
 <?php
+namespace App\Models;
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\SalvaDespesaRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth as Authenticate;
 use App\Models\Despesas;
 use App\Models\Categoria;
 
 
-use Illuminate\Http\Request;
-
 class DespesasController extends Controller {
     public function CadastrarDespesa() {
-        // $despesas = Despesas::get();
         $categorias = Categoria::get();
         // dd($categorias);
         return view('cadastro_despesa', ['categorias'=> $categorias]);
         
     }
 
-    public function SalvarDespesa(Request $resquest) {
-        $nome = $resquest['nome'];
-        $descricao = $resquest['descricao'];
-        $valor = $resquest['valor'];
-        $data_pagamento = $resquest['data_pagamento'];
-        $categoria_id = $resquest['categoria_id'];
-        $usuario_id = $resquest['usuario_id'];
+    public function SalvarDespesa(SalvaDespesaRequest $request) {
 
-        Despesas::create([
+        $nome = $request['nome'];
+        $descricao = $request['descricao'];
+        $valor = $request['valor'];
+        $data_pagamento = $request['data'];
+        $categoria_id = $request['categoria_id'];
+        $usuario_id = Authenticate::user()->id;
+        
+        $d = Despesas::create([
             "nome" => $nome,
             "descricao" => $descricao,
             "valor" => $valor,
             "data_pagamento" => date('Y-m-d H:i:s', strtotime($data_pagamento)),
             "categoria_id" => $categoria_id,
-            "usuario_id" => 1
+            "usuario_id" => $usuario_id
         ]);
 
         return redirect('/cadastrar-despesa');
     }
 
     public function ListarDespesa() {
-        $despesa = Despesas::get();
         $despesa = Despesas::select('despesas.id', 'despesas.nome', 'despesas.descricao', 'despesas.valor', 
-                'despesas.data_pagamento', 'despesas.categoria_id', 'categoria.nome as categoria')
-            ->join('categoria', 'categoria.id', '=', 'despesas.categoria_id')->get();
-// dd($despesa);   
-        return view('lista_despesa', ['despesas'=> $despesa]);
+            'despesas.data_pagamento', 'despesas.categoria_id', 'despesas.usuario_id', 'usuario.nome as usuario', 'categoria.nome as categoria')
+            ->leftJoin('usuario', 'usuario.id', '=', 'despesas.usuario_id')
+            ->join('categoria', 'categoria.id', '=', 'despesas.categoria_id')
+            ->orderBy('despesas.nome', 'asc')
+            ->get();
+            // dd($despesa);
+        return view('lista_despesa', ['despesas' => $despesa]);
     }
+
+
 
     public function DeleteDespesa($id) {
         $despesa = Despesas::where('id', $id)->delete();
@@ -59,7 +66,5 @@ class DespesasController extends Controller {
         $despesa = Despesas::where('id', $id)->update(['nome' => $request['nome']]);
         // dd($despesa);
         return redirect('/listar-despesa');    
-}
-
-    
+    }    
 }

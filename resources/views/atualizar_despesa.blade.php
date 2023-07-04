@@ -29,6 +29,7 @@
                 </li>
             </ul>
 
+            <p class="text-white">{{Auth::user()->nome}}</p>
             <a class="btn btn-primary mb-9 " style="float: right;" href="#" role="button">Sair</a>
 
 

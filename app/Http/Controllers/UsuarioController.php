@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Usuario;
 use App\Models\Categoria;
+use App\Models\Despesas;
+
 
 use Illuminate\Http\Request;
 

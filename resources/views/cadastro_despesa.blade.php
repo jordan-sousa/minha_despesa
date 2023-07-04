@@ -28,6 +28,7 @@
                 </li>
             </ul>
 
+            <p class="text-white">{{Auth::user()->nome}}</p>
             <a class="btn btn-primary mb-9 " style="float: right;" href="#" role="button">Sair</a>
 
 
@@ -35,7 +36,19 @@
     </nav>
 
     <div class="container">
+        <!-- Verifica se existem erros de validação -->
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    <!-- Exibe cada mensagem de erro -->
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="row justify-content-center d-flex align-items-center" style="height: 70vh;">
+
             <div class="col-md-6 text-white"> 
                 <h1 >Cadastro de Despesas</h1>
                 <form method="post" action="/save-despesa">
@@ -43,22 +56,22 @@
 
                     <div class="form-group">
                         <label for="descricao">Nome:</label>
-                        <input type="text" class="form-control" id="nome" name="nome" required>
+                        <input type="text" class="form-control" id="nome" name="nome" >
                     </div>
 
                     <div class="form-group">
                         <label for="descricao">Descrição:</label>
-                        <input type="text" class="form-control" id="descricao" name="descricao" required>
+                        <input type="text" class="form-control" id="descricao" name="descricao" >
                     </div>
 
                     <div class="form-group">
                         <label for="valor">Valor:</label>
-                        <input type="number" step="0.01" class="form-control" id="valor" name="valor" required>
+                        <input type="number" step="0.01" class="form-control" id="valor" name="valor" >
                     </div>
 
                     <div class="form-group">
                         <label for="data">Data:</label>
-                        <input type="date" class="form-control" id="data" name="data" required>
+                        <input type="date" class="form-control" id="data" name="data" >
                     </div>
 
                     <select class="form-control" aria-label="Default select example" name="categoria_id">
